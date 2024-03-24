@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import VideoPlayer from './components/VideoPlayer';
 import Option from './components/Option';
 import Notifications from './components/Notifications';
+import { CloudUploadRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -13,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    color: '#9c7945', 
+    fontWeight:'bold',
     width: '600px',
     border: '2px solid black',
 

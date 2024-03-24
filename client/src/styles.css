@@ -1,10 +1,5 @@
 body {
-    background:
-    linear-gradient(
-      rgba(0, 0, 0, 0.3), 
-      rgba(0, 0, 0, 0.3)
-    ),
-    url(https://images.pexels.com/photos/633409/pexels-photo-633409.jpeg?auto=compress&cs=tinysrgb&w=600);
+    background-image: url(../public/background.png);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
