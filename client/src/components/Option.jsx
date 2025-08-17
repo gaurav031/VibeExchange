@@ -3,38 +3,58 @@ import { Button, TextField, Grid, Typography, Container, Paper } from '@material
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Assignment, Phone, PhoneDisabled } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-// Correct import for icons
 import { SocketContext } from '../SocketContext';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
   },
-  gridContainer: {
+  container: {
     width: '100%',
-    [theme.breakpoints.down('xs')]: {
+    maxWidth: '800px',
+    margin: '20px auto',
+    padding: 0,
+  },
+  paper: {
+    padding: '25px',
+    borderRadius: '12px',
+    border: '2px solid #b46fff',
+    backgroundColor: '#2d1550',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+  },
+  sectionTitle: {
+    color: '#b46fff',
+    marginBottom: '20px',
+    fontWeight: '600',
+  },
+  textField: {
+    marginBottom: '20px',
+    '& .MuiOutlinedInput-root': {
+      borderRadius: '8px',
+      backgroundColor: '#fff',
+    },
+  },
+  button: {
+    borderRadius: '8px',
+    padding: '10px 20px',
+    fontWeight: 'bold',
+    textTransform: 'none',
+    fontSize: '1rem',
+    marginTop: '10px',
+    backgroundColor: '#b46fff',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#993ce3',
+    },
+  },
+  gridContainer: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
   },
-  container: {
-    width: '600px',
-    margin: '35px 0',
-    padding: 0,
-    [theme.breakpoints.down('xs')]: {
-      width: '80%',
-    },
-  },
-  margin: {
-    marginTop: 20,
-  },
-  padding: {
-    padding: 20,
-  },
-  paper: {
-    padding: '10px 20px',
-    border: '2px solid black',
+  gridItem: {
+    padding: '15px',
   },
 }));
 
@@ -45,27 +65,63 @@ const Option = ({ children }) => {
 
   return (
     <Container className={classes.container}>
-      <Paper elevation={10} className={classes.paper}>
+      <Paper elevation={3} className={classes.paper}>
         <form className={classes.root} noValidate autoComplete="off">
           <Grid container className={classes.gridContainer}>
-            <Grid item xs={12} md={6} className={classes.padding}>
-              <Typography gutterBottom variant="h6">Account Info</Typography>
-              <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth />
-              <CopyToClipboard text={me} className={classes.margin}>
-                <Button variant="contained" color="primary" fullWidth startIcon={<Assignment fontSize="large" />}>
+            <Grid item xs={12} md={6} className={classes.gridItem}>
+              <Typography variant="h6" className={classes.sectionTitle}>
+                Your Information
+              </Typography>
+              <TextField
+                label="Your Name"
+                variant="outlined"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                fullWidth
+                className={classes.textField}
+              />
+              <CopyToClipboard text={me}>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  className={classes.button}
+                  startIcon={<Assignment />}
+                >
                   Copy Your ID
                 </Button>
               </CopyToClipboard>
             </Grid>
-            <Grid item xs={12} md={6} className={classes.padding}>
-              <Typography gutterBottom variant="h6">Make a call</Typography>
-              <TextField label="ID to call" value={idToCall} onChange={(e) => setIdToCall(e.target.value)} fullWidth />
+            <Grid item xs={12} md={6} className={classes.gridItem}>
+              <Typography variant="h6" className={classes.sectionTitle}>
+                Make a Call
+              </Typography>
+              <TextField
+                label="ID to Call"
+                variant="outlined"
+                value={idToCall}
+                onChange={(e) => setIdToCall(e.target.value)}
+                fullWidth
+                className={classes.textField}
+              />
               {callAccepted && !callEnded ? (
-                <Button variant="contained" color="secondary" startIcon={<PhoneDisabled fontSize="large" />} fullWidth onClick={leaveCall} className={classes.margin}>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  className={classes.button}
+                  startIcon={<PhoneDisabled />}
+                  onClick={leaveCall}
+                  style={{ backgroundColor: '#e53935' }}
+                >
                   Hang Up
                 </Button>
               ) : (
-                <Button variant="contained" color="primary" startIcon={<Phone fontSize="large" />} fullWidth onClick={() => callUser(idToCall)} className={classes.margin}>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  className={classes.button}
+                  startIcon={<Phone />}
+                  onClick={() => callUser(idToCall)}
+                >
                   Call
                 </Button>
               )}
